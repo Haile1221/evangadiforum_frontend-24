@@ -25,7 +25,7 @@ function App() {
       tokenRef.current = "";
     } else {
       try {
-        const userRes = await axios.get("/users/check", {
+        const userRes = await axios.get("api/users/check", {
           headers: { Authorization: `Bearer ${tokenRef.current}` },
         });
 

@@ -22,7 +22,7 @@ function Home() {
   console.log(userData);
   const loadQuestions = async () => {
     try {
-      const { data } = await axios.get("/questions/getquestions", {
+      const { data } = await axios.get("api/questions/getquestions", {
         headers: {
           Authorization: `Bearer ${userData.token}`,
         },

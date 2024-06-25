@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "../../axios/axiosConfig";
+import ClipLoader from "react-spinners/ClipLoader";
 import "./account.css";
 
 function SignUp() {
@@ -12,6 +13,7 @@ function SignUp() {
   const passwordRef = useRef();
   const [agree, setAgree] = useState(false);
   const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,8 +34,10 @@ function SignUp() {
       return;
     }
 
+    setLoading(true); // Set loading to true when the request starts
+
     try {
-      const response = await axios.post("/users/register", {
+      const response = await axios.post("api/users/register", {
         username,
         firstname,
         lastname,
@@ -46,6 +50,8 @@ function SignUp() {
     } catch (error) {
       setError("Something went wrong. Please try again.");
       console.error(error);
+    } finally {
+      setLoading(false); // Set loading to false when the request completes
     }
   };
 
@@ -169,8 +175,17 @@ function SignUp() {
                 <div className="form-group">
                   <button
                     className="btn btn-lg btn-primary btn-block"
-                    type="submit">
-                    Agree and Join
+                    type="submit"
+                    disabled={loading}>
+                    {loading ? (
+                      <ClipLoader
+                        size={20}
+                        color={"#ffffff"}
+                        loading={loading}
+                      />
+                    ) : (
+                      "Agree and Join"
+                    )}
                   </button>
                 </div>
               </form>{" "}

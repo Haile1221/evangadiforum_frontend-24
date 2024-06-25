@@ -22,7 +22,7 @@ const AskQuestion = () => {
 
     try {
       await axios.post(
-        "/questions/newquestion",
+        "api/questions/newquestion",
         { title, question },
         {
           headers: { Authorization: `Bearer ${userData.token}` },

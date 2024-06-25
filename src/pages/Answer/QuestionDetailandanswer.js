@@ -18,10 +18,10 @@ const QuestionDetailandanswer = () => {
     const loadQuestionAndAnswers = async () => {
       try {
         const [questionResponse, answersResponse] = await Promise.all([
-          axios.get(`/questions/getquestionbyid/${question_id}`, {
+          axios.get(`api/questions/getquestionbyid/${question_id}`, {
             headers: { Authorization: `Bearer ${userData.token}` },
           }),
-          axios.get(`/answers/getanswers/${question_id}`, {
+          axios.get(`api/answers/getanswers/${question_id}`, {
             headers: { Authorization: `Bearer ${userData.token}` },
           }),
         ]);
@@ -49,7 +49,7 @@ const QuestionDetailandanswer = () => {
 
     try {
       await axios.post(
-        "/answers/newanswer",
+        "api/answers/newanswer",
         { question_id, answer },
         {
           headers: { Authorization: `Bearer ${userData.token}` },
